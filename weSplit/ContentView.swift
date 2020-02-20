@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var checkAmount = ""
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 2
+  //  @State private var zerotip = false
+
     
     var totalPerPerson: Double {
         //calculate total per person here
@@ -24,6 +26,10 @@ struct ContentView: View {
         let amountPerPerson = grandTotal / peopleCount
         
         return amountPerPerson
+    }
+    
+    var isEmpty: Bool {
+        return (Double(checkAmount) ?? 0).isZero
     }
     
     let tipPercentages = [10,15,20,25,0]
@@ -50,6 +56,7 @@ struct ContentView: View {
             }
             Section {
                 Text("$\(totalPerPerson, specifier: "%0.2f")")
+                    .foregroundColor(isEmpty ? .red : .black)
             }
         }
     }
